@@ -18,3 +18,10 @@ variable "ec2_storage_size" {
   default     = 8
   
 }
+
+variable "ec2_volume_type" {
+  description = "Type of EBS volume"
+  type        = string
+  default     = "gp2"
+  
+}

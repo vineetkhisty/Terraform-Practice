@@ -76,7 +76,8 @@ resource "aws_instance" "ec2_instance" {
   associate_public_ip_address = true
   root_block_device {
     volume_size = var.ec2_storage_size
-    volume_type = "gp2"
+    volume_type = var.ec2_volume_type
+    delete_on_termination = true
   }
   tags = {
     Name = "ec2_instance"
