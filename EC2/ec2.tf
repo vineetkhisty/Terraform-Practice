@@ -74,7 +74,7 @@ resource "aws_instance" "ec2_instance" {
   vpc_security_group_ids      = [aws_security_group.ec2_sg.id]
   subnet_id                   = aws_subnet.ec2_subnet.id
   associate_public_ip_address = true
-  user_data = "nginx_install.sh"
+  user_data = file("nginx_install.sh")
   root_block_device {
     volume_size = var.ec2_storage_size
     volume_type = var.ec2_volume_type
