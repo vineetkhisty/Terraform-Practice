@@ -68,13 +68,16 @@ resource "aws_route_table_association" "ec2_rta" {
 
 #Create an EC2 instance
 resource "aws_instance" "ec2_instance" {
-  ami                         = "ami-0c02fb55956c7d316" #Amazon Linux 2 AMI (HVM), SSD Volume Type - us-east-1
-  instance_type               = "t2.micro"
+  ami                         = var.ec2_ami_id #Amazon Linux 2 AMI (HVM), SSD Volume Type - us-east-1
+  instance_type               = var.ec2_instance_type
   key_name                    = aws_key_pair.ec2_key.key_name
   vpc_security_group_ids      = [aws_security_group.ec2_sg.id]
   subnet_id                   = aws_subnet.ec2_subnet.id
   associate_public_ip_address = true
-
+  root_block_device {
+    volume_size = var.ec2_storage_size
+    volume_type = "gp2"
+  }
   tags = {
     Name = "ec2_instance"
   }
